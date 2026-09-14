@@ -1,28 +1,18 @@
 export const MAX_HOPS = 3;
 
-export interface IntercomOrigin {
-  sessionID: string;
-  title?: string;
-  hop: number;
-}
-
 /**
- * Wraps a message so the receiving agent knows it arrived over the intercom,
- * who sent it, and how to answer. The marker doubles as the hop guard: the
- * reply tool reads the hop back out of storage to stop runaway agent-to-agent
- * loops.
+ * Wraps a message for delivery. The one-line provenance is the only ceremony:
+ * it tells the receiving agent (and human) which session sent it. Reply
+ * mechanics live in the tool description, never in the message. The hop
+ * budget is enforced from delivery metadata, not displayed.
  */
 export function wrapIntercomMessage({
   text,
-  origin,
+  title,
 }: {
   text: string;
-  origin: IntercomOrigin;
+  title?: string;
 }): string {
-  const title = origin.title?.trim() ? `"${origin.title.trim()}"` : "untitled";
-  return [
-    `[intercom • from ${title} (${origin.sessionID}) • hop ${origin.hop}/${MAX_HOPS}]`,
-    text.trim(),
-    "(Reply with the intercom tool; omit sessionID to answer this sender.)",
-  ].join("\n\n");
+  const sender = title?.trim() ? `"${title.trim()}"` : "another session";
+  return `[intercom · from ${sender}]\n\n${text.trim()}`;
 }

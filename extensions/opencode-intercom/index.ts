@@ -28,10 +28,7 @@ export default Plugin.define({
       }
       const delivered = await ctx.session.prompt({
         sessionID: input.to,
-        text: wrapIntercomMessage({
-          text: input.text,
-          origin: { sessionID: input.from, title: fromTitle, hop },
-        }),
+        text: wrapIntercomMessage({ text: input.text, title: fromTitle }),
         delivery: "queue",
         metadata: { intercom: { from: input.from, hop } },
       });
@@ -88,10 +85,7 @@ export default Plugin.define({
         name: "send",
         description:
           "Send a message to another OpenCode session (tool name: intercom_send). The message is queued into that session and its agent handles it on delivery. " +
-          "When a message marked [intercom] arrives in this session, reply with intercom_send and omit sessionID to reach the sender. " +
-          "Agent-to-agent chains are capped at " +
-          MAX_HOPS +
-          " hops.",
+          'Messages from other sessions arrive with a short [intercom · from "<title>"] line; judge whether a reply is warranted and, if so, send one with this tool — omit sessionID to reach that sender.',
         input: {
           type: "object",
           properties: {
