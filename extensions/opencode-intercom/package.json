@@ -1,0 +1,33 @@
+{
+  "name": "@opencode-kaush/opencode-intercom",
+  "version": "0.1.0",
+  "description": "Inter-session messaging for OpenCode: /intercom picker, intercom_send tool, queue-when-busy delivery, and reply-by-default between any two sessions",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./rpc": "./rpc.ts",
+    "./tui": "./tui.ts"
+  },
+  "files": [
+    "index.ts",
+    "rpc.ts",
+    "protocol.ts",
+    "tui.ts"
+  ],
+  "dependencies": {
+    "@opencode/plugin": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaushikgopal/opencode-kaush.git",
+    "directory": "extensions/opencode-intercom"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "intercom",
+    "sessions",
+    "multi-agent"
+  ]
+}
