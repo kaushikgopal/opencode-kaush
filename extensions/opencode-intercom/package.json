@@ -1,6 +1,6 @@
 {
   "name": "@opencode-kaush/opencode-intercom",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Inter-session messaging for OpenCode: /intercom picker, intercom_send tool, queue-when-busy delivery, and reply-by-default between any two sessions",
   "license": "MIT",
   "type": "module",
